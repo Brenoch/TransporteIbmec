@@ -41,7 +41,7 @@ struct EsqueciSenhaView: View {
                                 .stroke(Color.secondaryFixed, lineWidth: 1)
                         )
                         .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
+                        .disableAutocorrection(true)
                 }
 
                 VStack(alignment: .leading, spacing: 6) {
@@ -91,7 +91,7 @@ struct EsqueciSenhaView: View {
         .navigationTitle("Recuperacao")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { dismiss() }) {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.primaryContainer)

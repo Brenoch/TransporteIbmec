@@ -51,7 +51,7 @@ struct CadastroAlunoView: View {
         .navigationTitle("Cadastro")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { dismiss() }) {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.primaryContainer)

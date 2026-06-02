@@ -15,14 +15,16 @@ targets:
     sources:
       - path: .
         excludes:
-          - Tests*/**
           - "Tests iOS/**"
           - "Tests macOS/**"
-          - macOS/**
-          - *.xcodeproj
-          - project.yml
-          - README.md
+          - "macOS/**"
+          - "*.xcodeproj"
+          - "project.yml"
+          - "README.md"
+          - "Info.plist"
     resources:
       - Assets
     settings:
       PRODUCT_NAME: TransporteIBMEC
+      INFOPLIST_FILE: Info.plist
+      GENERATE_INFOPLIST_FILE: "NO"

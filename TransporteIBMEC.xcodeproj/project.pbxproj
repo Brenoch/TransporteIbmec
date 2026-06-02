@@ -23,16 +23,12 @@
 		76D045EA2FC5E23E0099F7DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045E82FC5E23E0099F7DA /* ContentView.swift */; };
 		76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */; };
 		76D045F72FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */; };
-		76D045F82FC5E2650099F7DA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76D045EC2FC5E2650099F7DA /* Info.plist */; };
-		76D045F92FC5E2650099F7DA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76D045EC2FC5E2650099F7DA /* Info.plist */; };
 		76D045FA2FC5E2650099F7DA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045ED2FC5E2650099F7DA /* AuthService.swift */; };
 		76D045FB2FC5E2650099F7DA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045ED2FC5E2650099F7DA /* AuthService.swift */; };
 		76D045FC2FC5E2650099F7DA /* MapaRotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */; };
 		76D045FD2FC5E2650099F7DA /* MapaRotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */; };
 		76D045FE2FC5E2650099F7DA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 76D045EF2FC5E2650099F7DA /* README.md */; };
 		76D045FF2FC5E2650099F7DA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 76D045EF2FC5E2650099F7DA /* README.md */; };
-		76D046002FC5E2650099F7DA /* LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F02FC5E2650099F7DA /* LoginApp.swift */; };
-		76D046012FC5E2650099F7DA /* LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F02FC5E2650099F7DA /* LoginApp.swift */; };
 		76D046022FC5E2650099F7DA /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F12FC5E2650099F7DA /* Color+Hex.swift */; };
 		76D046032FC5E2650099F7DA /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F12FC5E2650099F7DA /* Color+Hex.swift */; };
 		76D046042FC5E2650099F7DA /* project.yml in Resources */ = {isa = PBXBuildFile; fileRef = 76D045F22FC5E2650099F7DA /* project.yml */; };
@@ -82,7 +78,6 @@
 		76D045ED2FC5E2650099F7DA /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = SOURCE_ROOT; };
 		76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapaRotaView.swift; sourceTree = SOURCE_ROOT; };
 		76D045EF2FC5E2650099F7DA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		76D045F02FC5E2650099F7DA /* LoginApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApp.swift; sourceTree = SOURCE_ROOT; };
 		76D045F12FC5E2650099F7DA /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = SOURCE_ROOT; };
 		76D045F22FC5E2650099F7DA /* project.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = project.yml; sourceTree = SOURCE_ROOT; };
 		76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAlunoView.swift; sourceTree = SOURCE_ROOT; };
@@ -146,7 +141,6 @@
 				76D045F52FC5E2650099F7DA /* EsqueciSenhaView.swift */,
 				76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */,
 				76D045EC2FC5E2650099F7DA /* Info.plist */,
-				76D045F02FC5E2650099F7DA /* LoginApp.swift */,
 				76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */,
 				76D045F22FC5E2650099F7DA /* project.yml */,
 				76D045EF2FC5E2650099F7DA /* README.md */,
@@ -319,7 +313,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76D045FE2FC5E2650099F7DA /* README.md in Resources */,
-				76D045F82FC5E2650099F7DA /* Info.plist in Resources */,
 				76D046042FC5E2650099F7DA /* project.yml in Resources */,
 				7616C78B2FC5DF08004C5502 /* Assets.xcassets in Resources */,
 			);
@@ -330,7 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76D045FF2FC5E2650099F7DA /* README.md in Resources */,
-				76D045F92FC5E2650099F7DA /* Info.plist in Resources */,
 				76D046052FC5E2650099F7DA /* project.yml in Resources */,
 				7616C78C2FC5DF08004C5502 /* Assets.xcassets in Resources */,
 			);
@@ -361,7 +353,6 @@
 				76D046082FC5E2650099F7DA /* CadastroAlunoView.swift in Sources */,
 				76D045E92FC5E23E0099F7DA /* ContentView.swift in Sources */,
 				76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */,
-				76D046002FC5E2650099F7DA /* LoginApp.swift in Sources */,
 				76D045FC2FC5E2650099F7DA /* MapaRotaView.swift in Sources */,
 				76D0460A2FC5E2660099F7DA /* EsqueciSenhaView.swift in Sources */,
 				76D046062FC5E2650099F7DA /* HomeAlunoView.swift in Sources */,
@@ -380,7 +371,6 @@
 				76D046092FC5E2650099F7DA /* CadastroAlunoView.swift in Sources */,
 				76D045EA2FC5E23E0099F7DA /* ContentView.swift in Sources */,
 				76D045F72FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */,
-				76D046012FC5E2650099F7DA /* LoginApp.swift in Sources */,
 				76D045FD2FC5E2650099F7DA /* MapaRotaView.swift in Sources */,
 				76D0460B2FC5E2660099F7DA /* EsqueciSenhaView.swift in Sources */,
 				76D046072FC5E2650099F7DA /* HomeAlunoView.swift in Sources */,
