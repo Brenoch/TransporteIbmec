@@ -1,0 +1,28 @@
+name: TransporteIBMEC
+options:
+  bundleIdPrefix: com.brenoch
+configs:
+  Debug: debug
+  Release: release
+settings:
+  SWIFT_VERSION: 5.0
+targets:
+  TransporteIBMEC:
+    type: application
+    platform: iOS
+    deploymentTarget: "13.2"
+    bundleId: com.brenoch.TransporteIBMEC
+    sources:
+      - path: .
+        excludes:
+          - Tests*/**
+          - "Tests iOS/**"
+          - "Tests macOS/**"
+          - macOS/**
+          - *.xcodeproj
+          - project.yml
+          - README.md
+    resources:
+      - Assets
+    settings:
+      PRODUCT_NAME: TransporteIBMEC
