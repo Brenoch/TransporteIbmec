@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------------------
+# .gitignore — Xcode / Swift (TransporteIBMEC)
+# ---------------------------------------------------------------------------
+
+## Artefatos de build
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Estado/arquivos por-usuário do Xcode (não devem ser versionados)
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+## macOS
+.DS_Store
+
+## Swift Package Manager
+.swiftpm/
+.build/
+
+# ---------------------------------------------------------------------------
+# O repositório já tem lixo versionado (xcuserdata) commitado antes deste
+# .gitignore. Para parar de rastreá-lo, rode uma vez:
+#
+#   git rm -r --cached "TransporteIBMEC.xcodeproj/xcuserdata" "TransporteIBMEC.xcodeproj/project.xcworkspace/xcuserdata"
+#
+# e depois faça o commit. Os arquivos continuam no disco, só saem do versionamento.
+# ---------------------------------------------------------------------------
