@@ -2,114 +2,108 @@ import SwiftUI
 
 struct CadastroAlunoView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var authManager: AuthManager
 
     @State private var nome = ""
     @State private var email = ""
     @State private var matricula = ""
+    @State private var documento = ""
+    @State private var tipoDocumento = "CPF"
     @State private var senha = ""
-    @State private var confirmarSenha = ""
-    @State private var aceitouTermos = false
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+
+    private let tiposDocumento = ["CPF", "Passaporte"]
 
     var body: some View {
-        ZStack {
-            Color.surface
-                .ignoresSafeArea()
+        AuthScaffold {
+            VStack(spacing: 6) {
+                AuthBrandLogo()
+                    .padding(.bottom, 6)
 
-            ScrollView {
-                VStack(spacing: 18) {
-                    topo
+                Text("Criar conta")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(.white)
 
-                    Group {
-                        campo(titulo: "Nome completo", placeholder: "Digite seu nome", text: $nome)
-                        campo(titulo: "E-mail institucional", placeholder: "nome@aluno.ibmec.edu.br", text: $email)
-                        campo(titulo: "Matricula", placeholder: "2023xxxxxx", text: $matricula)
-                        campoSeguro(titulo: "Senha", placeholder: "Crie sua senha", text: $senha)
-                        campoSeguro(titulo: "Confirmar senha", placeholder: "Repita sua senha", text: $confirmarSenha)
+                Text("Preencha os dados para solicitar acesso")
+                    .font(.system(size: 14))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        } content: {
+            VStack(spacing: 0) {
+                AuthTabs(
+                    selected: .cadastrar,
+                    onEntrar: { dismiss() },
+                    onCadastrar: {}
+                )
+                .padding(.top, 20)
+                .padding(.horizontal, 28)
+                .padding(.bottom, 24)
+
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 18) {
+                        AuthField(label: "Nome completo", text: $nome)
+                        AuthField(label: "E-mail", text: $email, keyboardType: .emailAddress)
+                        AuthField(label: "Matrícula", text: $matricula, keyboardType: .numberPad)
+
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Tipo de documento")
+                                .font(.system(size: 12))
+                                .foregroundColor(.gray)
+                            Picker("Tipo de documento", selection: $tipoDocumento) {
+                                ForEach(tiposDocumento, id: \.self) { Text($0) }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+
+                        AuthField(label: tipoDocumento, text: $documento)
+                        AuthField(label: "Senha", text: $senha, isSecure: true)
+
+                        if let errorMessage = errorMessage {
+                            Text(errorMessage)
+                                .font(.caption)
+                                .foregroundColor(.error)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+
+                        AuthPrimaryButton(
+                            title: isLoading ? "Enviando..." : "Finalizar cadastro",
+                            isLoading: isLoading,
+                            enabled: camposValidos,
+                            action: realizarCadastro
+                        )
+                        .padding(.top, 4)
                     }
-
-                    Toggle(isOn: $aceitouTermos) {
-                        Text("Li e aceito os Termos de Uso e Politica de Privacidade")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                    }
-                    .toggleStyle(.switch)
-
-                    Button(action: {}) {
-                        Text("Finalizar cadastro")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(aceitouTermos ? Color.primaryContainer : Color.outline.opacity(0.4))
-                            .foregroundColor(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                    }
-                    .disabled(!aceitouTermos)
+                    .padding(.horizontal, 28)
+                    .padding(.bottom, 28)
                 }
-                .padding(20)
             }
         }
-        .navigationTitle("Cadastro")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color.primaryContainer)
-                }
+    }
+
+    private var camposValidos: Bool {
+        !nome.isEmpty && !email.isEmpty && !matricula.isEmpty && !documento.isEmpty && !senha.isEmpty
+    }
+
+    private func realizarCadastro() {
+        errorMessage = nil
+        isLoading = true
+        Task {
+            do {
+                try await authManager.register(
+                    matricula: matricula,
+                    senha: senha,
+                    nome: nome,
+                    email: email,
+                    documento: documento,
+                    tipoDocumento: tipoDocumento
+                )
+                // Sucesso: volta para o login.
+                dismiss()
+            } catch {
+                errorMessage = error.localizedDescription
             }
-        }
-    }
-
-    private var topo: some View {
-        VStack(spacing: 10) {
-            Image(systemName: "person.crop.circle.badge.plus")
-                .font(.system(size: 40))
-                .foregroundColor(Color.primaryContainer)
-
-            Text("Criar conta")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(Color.primaryContainer)
-
-            Text("Preencha os dados para solicitar acesso ao transporte")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding(.bottom, 6)
-    }
-
-    private func campo(titulo: String, placeholder: String, text: Binding<String>) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(titulo)
-                .font(.caption)
-                .foregroundColor(.secondary)
-
-            TextField(placeholder, text: text)
-                .padding()
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke(Color.secondaryFixed, lineWidth: 1)
-                )
-        }
-    }
-
-    private func campoSeguro(titulo: String, placeholder: String, text: Binding<String>) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(titulo)
-                .font(.caption)
-                .foregroundColor(.secondary)
-
-            SecureField(placeholder, text: text)
-                .padding()
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke(Color.secondaryFixed, lineWidth: 1)
-                )
+            isLoading = false
         }
     }
 }

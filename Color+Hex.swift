@@ -30,4 +30,12 @@ extension Color {
     static let outline = Color(hex: "#747780")
     static let successGreen = Color(hex: "#22C55E")
     static let error = Color(hex: "#BA1A1A")
+
+    // Brand tokens (Stitch "IBMEC Transporte")
+    static let ibmecBlue = Color(hex: "#002555")
+    static let ibmecBlueDeep = Color(hex: "#001D44")
+    static let ibmecAccent = Color(hex: "#F5AC00")
+    static let ibmecField = Color(hex: "#F9FAFB")
+    static let ibmecBorder = Color(hex: "#E5E7EB")
+    static let ibmecText = Color(hex: "#333333")
 }
