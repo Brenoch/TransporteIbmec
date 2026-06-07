@@ -1,25 +1,16 @@
-# TransporteIBMEC — gerador de Xcode project
+# TransporteIBMEC
 
-Este repositório contém o código-fonte da app SwiftUI. Para gerar o `.xcodeproj` no Mac (compatível com Xcode 13.2), siga os passos abaixo:
+App SwiftUI de transporte universitário do Ibmec.
 
-1. Instale o XcodeGen:
+## Como abrir
 
-```bash
-brew install xcodegen
-```
-
-2. Gere o projeto:
-
-```bash
-xcodegen generate
-```
-
-3. Abra no Xcode:
+O projeto é editado diretamente pelo `.xcodeproj` no Xcode (não usa mais XcodeGen/`project.yml`):
 
 ```bash
 open TransporteIBMEC.xcodeproj
 ```
 
-Observações:
-- O `project.yml` foi configurado com `deploymentTarget: 13.2`.
-- Ajuste `bundleId` em `project.yml` se necessário.
+## Requisitos
+
+- Xcode 13.2+
+- iOS deployment target: 15.2
