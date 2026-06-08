@@ -8,11 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7616C7742FC5DF08004C5502 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C7732FC5DF08004C5502 /* Tests_iOS.swift */; };
-		7616C7762FC5DF08004C5502 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C7752FC5DF08004C5502 /* Tests_iOSLaunchTests.swift */; };
-		7616C7832FC5DF08004C5502 /* TransporteIBMEC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7616C7582FC5DF05004C5502 /* TransporteIBMEC.xcdatamodeld */; };
-		7616C7852FC5DF08004C5502 /* TransporteIBMECApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */; };
-		7616C7892FC5DF08004C5502 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C75C2FC5DF05004C5502 /* Persistence.swift */; };
-		7616C78B2FC5DF08004C5502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7616C75D2FC5DF08004C5502 /* Assets.xcassets */; };
+		7616C7762FC5DF08004C5502 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C7752FC5DF08004C5502 /* Tests_iOSLaunchTests.swift */; };		7616C7852FC5DF08004C5502 /* TransporteIBMECApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */; };		7616C78B2FC5DF08004C5502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7616C75D2FC5DF08004C5502 /* Assets.xcassets */; };
 		76D045E92FC5E23E0099F7DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045E82FC5E23E0099F7DA /* ContentView.swift */; };
 		76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */; };
 		76D046022FC5E2650099F7DA /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F12FC5E2650099F7DA /* Color+Hex.swift */; };
@@ -41,11 +37,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXFileReference section */
-		7616C7592FC5DF05004C5502 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
-		7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransporteIBMECApp.swift; sourceTree = "<group>"; };
-		7616C75C2FC5DF05004C5502 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		7616C75D2FC5DF08004C5502 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* Begin PBXFileReference section */		7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransporteIBMECApp.swift; sourceTree = "<group>"; };		7616C75D2FC5DF08004C5502 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7616C7622FC5DF08004C5502 /* TransporteIBMEC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransporteIBMEC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7616C76F2FC5DF08004C5502 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7616C7732FC5DF08004C5502 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
@@ -101,9 +93,7 @@
 		7616C7572FC5DF05004C5502 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */,
-				7616C75C2FC5DF05004C5502 /* Persistence.swift */,
-				76D045E82FC5E23E0099F7DA /* ContentView.swift */,				76D045F42FC5E2650099F7DA /* CadastroAlunoView.swift */,
+				7616C75A2FC5DF05004C5502 /* TransporteIBMECApp.swift */,				76D045E82FC5E23E0099F7DA /* ContentView.swift */,				76D045F42FC5E2650099F7DA /* CadastroAlunoView.swift */,
 				76AA000000000000000000F1 /* AuthComponents.swift */,
 				76AA000000000000000000F3 /* RouteDetailView.swift */,
 				76AA000000000000000000F5 /* ShareSheet.swift */,
@@ -112,9 +102,7 @@
 				76D045F52FC5E2650099F7DA /* EsqueciSenhaView.swift */,
 				76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */,
 				76D045EC2FC5E2650099F7DA /* Info.plist */,				76D045EF2FC5E2650099F7DA /* README.md */,
-				7616C75D2FC5DF08004C5502 /* Assets.xcassets */,
-				7616C7582FC5DF05004C5502 /* TransporteIBMEC.xcdatamodeld */,
-			);
+				7616C75D2FC5DF08004C5502 /* Assets.xcassets */,			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
@@ -240,8 +228,7 @@
 				76D045E92FC5E23E0099F7DA /* ContentView.swift in Sources */,
 				76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */,				76D0460A2FC5E2660099F7DA /* EsqueciSenhaView.swift in Sources */,
 				76AA000000000000000000F2 /* AuthComponents.swift in Sources */,
-				76D046062FC5E2650099F7DA /* HomeAlunoView.swift in Sources */,				7616C7892FC5DF08004C5502 /* Persistence.swift in Sources */,
-				7616C7832FC5DF08004C5502 /* TransporteIBMEC.xcdatamodeld in Sources */,
+				76D046062FC5E2650099F7DA /* HomeAlunoView.swift in Sources */,
 				76D046022FC5E2650099F7DA /* Color+Hex.swift in Sources */,
 				76BB000000000000000000B1 /* AppConfig.swift in Sources */,
 				76BB000000000000000000B2 /* APIError.swift in Sources */,
@@ -519,19 +506,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		7616C7582FC5DF05004C5502 /* TransporteIBMEC.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7616C7592FC5DF05004C5502 /* Shared.xcdatamodel */,
-			);
-			currentVersion = 7616C7592FC5DF05004C5502 /* Shared.xcdatamodel */;
-			path = TransporteIBMEC.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7616C7532FC5DF05004C5502 /* Project object */;
 }

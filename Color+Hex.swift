@@ -24,7 +24,7 @@ extension Color {
     }
 
     static let primaryContainer = Color(hex: "#00204A")
-    static let primary = Color(hex: "#000A1F")
+    static let ibmecPrimary = Color(hex: "#000A1F")
     static let secondaryFixed = Color(hex: "#DAE2F9")
     static let surface = Color(hex: "#FAF9FD")
     static let outline = Color(hex: "#747780")
@@ -38,4 +38,15 @@ extension Color {
     static let ibmecField = Color(hex: "#F9FAFB")
     static let ibmecBorder = Color(hex: "#E5E7EB")
     static let ibmecText = Color(hex: "#333333")
+
+    // Superfícies/cinzas centralizados (mesmos valores que estavam soltos nas telas)
+    static let ibmecBackground = Color(hex: "#F3F4F6")
+    static let ibmecSurfaceAlt = Color(hex: "#F8FAFC")
+    static let ibmecCardBorder = Color(hex: "#EEF0F3")
+    static let ibmecCardBorderLight = Color(hex: "#F0F0F0")
+    static let ibmecHairline = Color(hex: "#E2E8F0")
+    static let ibmecSlate = Color(hex: "#1E293B")
+    static let ibmecSlateTint = Color(hex: "#F1F5F9")
+    static let ibmecBlueGradientEnd = Color(hex: "#003B8A")
+    static let ibmecPrimaryFixed = Color(hex: "#D7E2FF")
 }

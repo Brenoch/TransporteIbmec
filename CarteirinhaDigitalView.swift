@@ -129,7 +129,7 @@ struct CarteirinhaDigitalView: View {
                 Button(action: { baixarOffline(perfil) }) {
                     Label("Baixar Offline", systemImage: "arrow.down.circle")
                         .frame(maxWidth: .infinity).padding()
-                        .background(Color(hex: "#D7E2FF")).foregroundColor(.ibmecBlue).cornerRadius(12)
+                        .background(Color.ibmecPrimaryFixed).foregroundColor(.ibmecBlue).cornerRadius(12)
                 }
             }
 

@@ -70,6 +70,7 @@ struct AuthField: View {
                             .foregroundColor(.gray)
                     }
                     .padding(.top, floating ? 14 : 0)
+                    .accessibilityLabel(revealed ? "Ocultar senha" : "Mostrar senha")
                 }
             }
 
@@ -196,5 +197,18 @@ struct AuthScaffold<Header: View, Content: View>: View {
             }
         }
         .navigationBarHidden(true)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Concluído") { dismissKeyboard() }
+            }
+        }
     }
+}
+
+// MARK: - Util
+
+/// Fecha o teclado (útil para numberPad, que não tem botão "return").
+func dismissKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 }

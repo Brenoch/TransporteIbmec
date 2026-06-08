@@ -14,7 +14,7 @@ struct HomeAlunoView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            Color(hex: "#F3F4F6").ignoresSafeArea()
+            Color.ibmecBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
@@ -57,6 +57,7 @@ struct HomeAlunoView: View {
                     .font(.system(size: 24))
                     .foregroundColor(.ibmecAccent)
             }
+            .accessibilityLabel("Abrir menu")
         }
         .padding(.horizontal, 16)
         .frame(height: 64)
@@ -92,7 +93,7 @@ struct HomeAlunoView: View {
 
     private var bannerAlerta: some View {
         ZStack(alignment: .topTrailing) {
-            LinearGradient(colors: [Color.ibmecBlue, Color(hex: "#003B8A")], startPoint: .leading, endPoint: .trailing)
+            LinearGradient(colors: [Color.ibmecBlue, Color.ibmecBlueGradientEnd], startPoint: .leading, endPoint: .trailing)
 
             HStack(spacing: 4) {
                 Image(systemName: "bell.fill").font(.system(size: 11))
@@ -160,7 +161,7 @@ struct HomeAlunoView: View {
         let destino = it.rotas.last ?? "—"
         return HStack(spacing: 16) {
             ZStack {
-                Circle().fill(it.emRota ? Color.green.opacity(0.15) : Color(hex: "#F3F4F6"))
+                Circle().fill(it.emRota ? Color.green.opacity(0.15) : Color.ibmecBackground)
                 Image(systemName: "bus.fill").foregroundColor(it.emRota ? .green : .gray)
             }
             .frame(width: 48, height: 48)
@@ -184,7 +185,7 @@ struct HomeAlunoView: View {
                     .font(.system(size: 13, weight: .bold))
                     .foregroundColor(it.emRota ? .ibmecBlue : .gray)
                     .padding(.horizontal, 10).padding(.vertical, 4)
-                    .background(it.emRota ? Color.ibmecAccent : Color(hex: "#E5E7EB"))
+                    .background(it.emRota ? Color.ibmecAccent : Color.ibmecBorder)
                     .clipShape(RoundedRectangle(cornerRadius: 6))
                 if it.emRota {
                     Text("EM ROTA").font(.system(size: 9, weight: .medium)).foregroundColor(.ibmecAccent)
@@ -196,7 +197,7 @@ struct HomeAlunoView: View {
         .padding(16)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).stroke(Color(hex: "#F0F0F0"), lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).stroke(Color.ibmecCardBorderLight, lineWidth: 1))
         .shadow(color: .black.opacity(0.04), radius: 6, y: 2)
     }
 
@@ -315,6 +316,7 @@ private struct MenuLateralView: View {
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white.opacity(0.8))
                 }
+                .accessibilityLabel("Fechar menu")
             }
             Text(nomeAluno.isEmpty ? "Aluno Ibmec" : nomeAluno)
                 .font(.system(size: 20, weight: .bold)).foregroundColor(.white)

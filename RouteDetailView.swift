@@ -23,15 +23,9 @@ struct RouteDetailView: View {
         return [BusPin(coordinate: CLLocationCoordinate2D(latitude: b.lat, longitude: b.lng))]
     }
 
-    private var paradas: [(nome: String, horario: String?)] {
-        itinerario.rotas.enumerated().map { idx, nome in
-            (nome, idx < itinerario.horarios.count ? itinerario.horarios[idx] : nil)
-        }
-    }
-
     var body: some View {
         ZStack(alignment: .top) {
-            Color(hex: "#F8FAFC").ignoresSafeArea()
+            Color.ibmecSurfaceAlt.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
@@ -120,6 +114,7 @@ struct RouteDetailView: View {
                     .foregroundColor(.white)
                     .padding(8)
             }
+            .accessibilityLabel("Voltar")
             Text(itinerario.nome)
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
@@ -171,7 +166,7 @@ struct RouteDetailView: View {
                     Image(systemName: "location.fill")
                         .foregroundColor(.gray)
                         .frame(width: 32, height: 32)
-                        .background(Color(hex: "#F1F5F9"))
+                        .background(Color.ibmecSlateTint)
                         .clipShape(Circle())
                     VStack(alignment: .leading, spacing: 2) {
                         Text("LOCALIZAÇÃO ATUAL")
@@ -201,38 +196,29 @@ struct RouteDetailView: View {
                 .foregroundColor(.ibmecBlue)
 
             VStack(spacing: 10) {
-                ForEach(Array(paradas.enumerated()), id: \.offset) { idx, parada in
-                    let ehDestino = idx == paradas.count - 1
+                ForEach(Array(itinerario.rotas.enumerated()), id: \.offset) { idx, nome in
+                    let ehDestino = idx == itinerario.rotas.count - 1
                     HStack(spacing: 14) {
                         Image(systemName: ehDestino ? "flag.fill" : "mappin.circle.fill")
                             .foregroundColor(.white)
                             .frame(width: 40, height: 40)
-                            .background(ehDestino ? Color(hex: "#1E293B") : Color.ibmecBlue)
+                            .background(ehDestino ? Color.ibmecSlate : Color.ibmecBlue)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
-                        VStack(alignment: .leading, spacing: 2) {
-                            HStack {
-                                Text(parada.nome)
-                                    .font(.system(size: 15, weight: .bold))
-                                    .foregroundColor(.ibmecBlue)
-                                Spacer()
-                                Text(idx == 0 ? "PARTIDA" : (ehDestino ? "DESTINO" : "PARADA"))
-                                    .font(.system(size: 9, weight: .bold))
-                                    .foregroundColor(idx == 0 ? .green : .gray)
-                                    .padding(.horizontal, 6).padding(.vertical, 2)
-                                    .background((idx == 0 ? Color.green : Color.gray).opacity(0.12))
-                                    .clipShape(RoundedRectangle(cornerRadius: 4))
-                            }
-                            if let h = parada.horario {
-                                Label(h, systemImage: "clock")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.gray)
-                            }
-                        }
+                        Text(nome)
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.ibmecBlue)
+                        Spacer()
+                        Text(idx == 0 ? "PARTIDA" : (ehDestino ? "DESTINO" : "PARADA"))
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(idx == 0 ? .green : .gray)
+                            .padding(.horizontal, 6).padding(.vertical, 2)
+                            .background((idx == 0 ? Color.green : Color.gray).opacity(0.12))
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
                     .padding(12)
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(hex: "#EEF0F3"), lineWidth: 1))
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.ibmecCardBorder, lineWidth: 1))
                 }
             }
         }
@@ -256,7 +242,7 @@ struct RouteDetailView: View {
                         .padding(.vertical, 8)
                         .background(atual ? Color.ibmecBlue : Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(hex: "#EEF0F3"), lineWidth: atual ? 0 : 1))
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.ibmecCardBorder, lineWidth: atual ? 0 : 1))
                 }
             }
         }
@@ -279,7 +265,7 @@ struct RouteDetailView: View {
                     .font(.system(size: 16, weight: .bold))
                     .frame(maxWidth: .infinity).padding(.vertical, 16)
                     .foregroundColor(.ibmecBlue)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(hex: "#E2E8F0"), lineWidth: 2))
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.ibmecHairline, lineWidth: 2))
             }
         }
     }
