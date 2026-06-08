@@ -45,14 +45,17 @@ private struct SplashView: View {
 
 private struct AppPrincipalView: View {
     let nomeAluno: String
+    @State private var selectedTab = 0
 
     var body: some View {
-        TabView {
-            HomeAlunoView(nomeAluno: nomeAluno)
+        TabView(selection: $selectedTab) {
+            HomeAlunoView(nomeAluno: nomeAluno, irParaCarteirinha: { selectedTab = 1 })
                 .tabItem { Label("Home", systemImage: "house") }
+                .tag(0)
 
             CarteirinhaDigitalView()
                 .tabItem { Label("Carteirinha", systemImage: "person.text.rectangle") }
+                .tag(1)
         }
         .tint(Color.ibmecBlue)
     }

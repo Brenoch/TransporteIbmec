@@ -7,6 +7,8 @@ struct CarteirinhaDigitalView: View {
     @State private var perfil: MeResponse?
     @State private var carregando = true
     @State private var erro: String?
+    @State private var mostrarShare = false
+    @State private var itensShare: [Any] = []
 
     var body: some View {
         ZStack {
@@ -18,6 +20,9 @@ struct CarteirinhaDigitalView: View {
             }
         }
         .task { await carregar() }
+        .sheet(isPresented: $mostrarShare) {
+            ShareSheet(items: itensShare)
+        }
     }
 
     private var header: some View {
@@ -116,12 +121,12 @@ struct CarteirinhaDigitalView: View {
             .cornerRadius(24)
 
             VStack(spacing: 12) {
-                Button(action: {}) {
+                Button(action: { compartilhar(perfil) }) {
                     Label("Compartilhar", systemImage: "square.and.arrow.up")
                         .frame(maxWidth: .infinity).padding()
                         .background(Color.ibmecBlue).foregroundColor(.white).cornerRadius(12)
                 }
-                Button(action: {}) {
+                Button(action: { baixarOffline(perfil) }) {
                     Label("Baixar Offline", systemImage: "arrow.down.circle")
                         .frame(maxWidth: .infinity).padding()
                         .background(Color(hex: "#D7E2FF")).foregroundColor(.ibmecBlue).cornerRadius(12)
@@ -150,6 +155,20 @@ struct CarteirinhaDigitalView: View {
             erro = error.localizedDescription
         }
         carregando = false
+    }
+
+    private func compartilhar(_ perfil: MeResponse) {
+        itensShare = ["Carteirinha Ibmec — \(perfil.nome) — Matrícula \(perfil.matricula)"]
+        mostrarShare = true
+    }
+
+    private func baixarOffline(_ perfil: MeResponse) {
+        if let qr = qrImage(from: perfil.matricula) {
+            itensShare = [qr]
+        } else {
+            itensShare = ["Matrícula \(perfil.matricula)"]
+        }
+        mostrarShare = true
     }
 
     private func iniciais(_ nome: String) -> String {

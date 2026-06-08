@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeAlunoView: View {
     let nomeAluno: String
+    var irParaCarteirinha: () -> Void = {}
 
     @EnvironmentObject private var authManager: AuthManager
 
@@ -9,30 +10,29 @@ struct HomeAlunoView: View {
     @State private var carregando = true
     @State private var erro: String?
     @State private var mostrarMenu = false
+    @State private var rotaSelecionada: Itinerario?
 
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .top) {
-                Color(hex: "#F3F4F6").ignoresSafeArea()
+        ZStack(alignment: .top) {
+            Color(hex: "#F3F4F6").ignoresSafeArea()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 24) {
-                        bannerAlerta
-                        rotasDeHoje
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 80)
-                    .padding(.bottom, 24)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    bannerAlerta
+                    rotasDeHoje
                 }
-
-                header
+                .padding(.horizontal, 16)
+                .padding(.top, 80)
+                .padding(.bottom, 24)
             }
-            .navigationBarHidden(true)
+
+            header
+
+            drawer
         }
-        .navigationViewStyle(.stack)
         .task { await carregar() }
-        .sheet(isPresented: $mostrarMenu) {
-            MenuLateralView(nomeAluno: nomeAluno, authManager: authManager)
+        .fullScreenCover(item: $rotaSelecionada) { rota in
+            RouteDetailView(itinerario: rota)
         }
     }
 
@@ -52,7 +52,7 @@ struct HomeAlunoView: View {
                 .foregroundColor(.white)
             }
             Spacer()
-            Button(action: { mostrarMenu = true }) {
+            Button(action: { withAnimation(.easeInOut(duration: 0.25)) { mostrarMenu = true } }) {
                 Image(systemName: "line.3.horizontal")
                     .font(.system(size: 24))
                     .foregroundColor(.ibmecAccent)
@@ -61,6 +61,31 @@ struct HomeAlunoView: View {
         .padding(.horizontal, 16)
         .frame(height: 64)
         .background(Color.ibmecBlue.ignoresSafeArea(edges: .top))
+    }
+
+    // MARK: Drawer lateral (estilo Stitch)
+
+    @ViewBuilder
+    private var drawer: some View {
+        if mostrarMenu {
+            Color.black.opacity(0.5)
+                .ignoresSafeArea()
+                .onTapGesture { fecharMenu() }
+                .transition(.opacity)
+
+            HStack(spacing: 0) {
+                Spacer(minLength: 0)
+                MenuLateralView(nomeAluno: nomeAluno, authManager: authManager, fechar: fecharMenu, irParaCarteirinha: irParaCarteirinha)
+                    .frame(width: UIScreen.main.bounds.width * 0.8)
+                    .background(Color.white.ignoresSafeArea())
+                    .transition(.move(edge: .trailing))
+            }
+            .ignoresSafeArea()
+        }
+    }
+
+    private func fecharMenu() {
+        withAnimation(.easeInOut(duration: 0.25)) { mostrarMenu = false }
     }
 
     // MARK: Banner (estático — não há fonte no backend)
@@ -109,7 +134,7 @@ struct HomeAlunoView: View {
             } else {
                 VStack(spacing: 12) {
                     ForEach(itinerarios) { it in
-                        NavigationLink(destination: RouteDetailView(itinerario: it)) {
+                        Button(action: { rotaSelecionada = it }) {
                             rotaCard(it)
                         }
                         .buttonStyle(.plain)
@@ -202,36 +227,56 @@ struct HomeAlunoView: View {
 private struct MenuLateralView: View {
     let nomeAluno: String
     @ObservedObject var authManager: AuthManager
-    @Environment(\.dismiss) private var dismiss
+    let fechar: () -> Void
+    var irParaCarteirinha: () -> Void = {}
+
+    @Environment(\.openURL) private var openURL
+    @State private var mostrarEmBreve = false
+
+    // TODO: preencher com as URLs oficiais do Ibmec
+    private let savaURLString = "" // TODO
+    private let siaURLString = ""  // TODO
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 cabecalho
 
                 VStack(alignment: .leading, spacing: 4) {
-                    item(icone: "person.text.rectangle", titulo: "Carteirinha", subtitulo: "Acesso rápido ao transporte")
-                    item(icone: "clock", titulo: "Horários", subtitulo: "Tabela completa de partidas")
-                    item(icone: "mappin.and.ellipse", titulo: "Pontos de Embarque", subtitulo: "Veja os locais no mapa")
+                    item(icone: "person.text.rectangle", titulo: "Carteirinha", subtitulo: "Acesso rápido ao transporte") {
+                        fechar(); irParaCarteirinha()
+                    }
+                    item(icone: "clock", titulo: "Horários", subtitulo: "Tabela completa de partidas") {
+                        mostrarEmBreve = true
+                    }
+                    item(icone: "mappin.and.ellipse", titulo: "Pontos de Embarque", subtitulo: "Veja os locais no mapa") {
+                        mostrarEmBreve = true
+                    }
                 }
                 .padding(.vertical, 16).padding(.horizontal, 12)
 
                 secao("SERVIÇOS ACADÊMICOS")
                 VStack(alignment: .leading, spacing: 4) {
-                    item(icone: "graduationcap", titulo: "SAVA", subtitulo: "Disciplinas e materiais")
-                    item(icone: "desktopcomputer", titulo: "SIA", subtitulo: "Portal de serviços integrados")
+                    item(icone: "graduationcap", titulo: "SAVA", subtitulo: "Disciplinas e materiais") {
+                        abrir(savaURLString)
+                    }
+                    item(icone: "desktopcomputer", titulo: "SIA", subtitulo: "Portal de serviços integrados") {
+                        abrir(siaURLString)
+                    }
                 }
                 .padding(.horizontal, 12)
 
                 secao("AJUDA E SUPORTE")
                 VStack(alignment: .leading, spacing: 4) {
-                    item(icone: "questionmark.circle", titulo: "Central de Ajuda", subtitulo: "Perguntas frequentes")
+                    item(icone: "questionmark.circle", titulo: "Central de Ajuda", subtitulo: "Perguntas frequentes") {
+                        mostrarEmBreve = true
+                    }
                 }
                 .padding(.horizontal, 12)
 
                 Divider().padding(.vertical, 12)
 
-                Button(action: { Task { await authManager.logout() } }) {
+                Button(action: { fechar(); Task { await authManager.logout() } }) {
                     HStack {
                         Spacer()
                         Label("Sair da conta", systemImage: "rectangle.portrait.and.arrow.right")
@@ -242,19 +287,40 @@ private struct MenuLateralView: View {
                 }
             }
         }
+        .alert("Em breve", isPresented: $mostrarEmBreve) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Funcionalidade em desenvolvimento.")
+        }
+    }
+
+    private func abrir(_ urlString: String) {
+        if !urlString.isEmpty, let url = URL(string: urlString) {
+            fechar()
+            openURL(url)
+        } else {
+            mostrarEmBreve = true
+        }
     }
 
     private var cabecalho: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Image(systemName: "person.crop.circle.fill")
-                .font(.system(size: 56)).foregroundColor(.white)
-                .overlay(Circle().stroke(Color.ibmecAccent, lineWidth: 2))
-
+            HStack {
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 56)).foregroundColor(.white)
+                    .overlay(Circle().stroke(Color.ibmecAccent, lineWidth: 2))
+                Spacer()
+                Button(action: fechar) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white.opacity(0.8))
+                }
+            }
             Text(nomeAluno.isEmpty ? "Aluno Ibmec" : nomeAluno)
                 .font(.system(size: 20, weight: .bold)).foregroundColor(.white)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(24).padding(.top, 16)
+        .padding(24).padding(.top, 24)
         .background(Color.ibmecBlue)
     }
 
@@ -264,15 +330,19 @@ private struct MenuLateralView: View {
             .padding(.horizontal, 24).padding(.top, 8)
     }
 
-    private func item(icone: String, titulo: String, subtitulo: String) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: icone).font(.system(size: 20)).foregroundColor(.ibmecBlue).frame(width: 28)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(titulo).font(.system(size: 14, weight: .semibold)).foregroundColor(.ibmecBlue)
-                Text(subtitulo).font(.system(size: 11)).foregroundColor(.gray)
+    private func item(icone: String, titulo: String, subtitulo: String, acao: @escaping () -> Void) -> some View {
+        Button(action: acao) {
+            HStack(spacing: 12) {
+                Image(systemName: icone).font(.system(size: 20)).foregroundColor(.ibmecBlue).frame(width: 28)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(titulo).font(.system(size: 14, weight: .semibold)).foregroundColor(.ibmecBlue)
+                    Text(subtitulo).font(.system(size: 11)).foregroundColor(.gray)
+                }
+                Spacer()
             }
-            Spacer()
+            .contentShape(Rectangle())
+            .padding(.horizontal, 12).padding(.vertical, 10)
         }
-        .padding(.horizontal, 12).padding(.vertical, 10)
+        .buttonStyle(.plain)
     }
 }

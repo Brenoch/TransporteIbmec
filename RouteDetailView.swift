@@ -1,11 +1,15 @@
 import SwiftUI
 import MapKit
+import UserNotifications
 
 /// Detalhe de um itinerário (paradas + horários), no estilo "Route Detail" do Stitch.
 struct RouteDetailView: View {
     let itinerario: Itinerario
     @Environment(\.dismiss) private var dismiss
 
+    @State private var alertaAtivo = false
+    @State private var mostrarShare = false
+    @State private var itensShare: [Any] = []
     @State private var bus: LiveLocation?
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -22.9519, longitude: -43.1836),
@@ -45,6 +49,9 @@ struct RouteDetailView: View {
             header
         }
         .navigationBarHidden(true)
+        .sheet(isPresented: $mostrarShare) {
+            ShareSheet(items: itensShare)
+        }
         .task(id: itinerario.id) {
             while !Task.isCancelled {
                 await atualizarLocalizacao()
@@ -259,20 +266,52 @@ struct RouteDetailView: View {
 
     private var acoes: some View {
         VStack(spacing: 12) {
-            Button(action: {}) {
-                Label("Ativar Alerta de Chegada", systemImage: "bell.badge")
+            Button(action: alternarAlerta) {
+                Label(alertaAtivo ? "Alerta Ativado ✓" : "Ativar Alerta de Chegada",
+                      systemImage: alertaAtivo ? "checkmark.circle.fill" : "bell.badge")
                     .font(.system(size: 16, weight: .bold))
                     .frame(maxWidth: .infinity).padding(.vertical, 16)
-                    .background(Color.ibmecBlue).foregroundColor(.white)
+                    .background(alertaAtivo ? Color.successGreen : Color.ibmecBlue).foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             }
-            Button(action: {}) {
+            Button(action: compartilharRota) {
                 Label("Compartilhar Rota", systemImage: "square.and.arrow.up")
                     .font(.system(size: 16, weight: .bold))
                     .frame(maxWidth: .infinity).padding(.vertical, 16)
                     .foregroundColor(.ibmecBlue)
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(hex: "#E2E8F0"), lineWidth: 2))
             }
+        }
+    }
+
+    private func compartilharRota() {
+        let origem = itinerario.rotas.first ?? "—"
+        let destino = itinerario.rotas.last ?? "—"
+        let texto = """
+        \(itinerario.nome)
+        De \(origem) até \(destino)
+        Horários: \(itinerario.horarios.joined(separator: ", "))
+        """
+        itensShare = [texto]
+        mostrarShare = true
+    }
+
+    private func alternarAlerta() {
+        alertaAtivo.toggle()
+        let center = UNUserNotificationCenter.current()
+        let id = "alerta-\(itinerario.id)"
+        if alertaAtivo {
+            center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+                guard granted else { return }
+                let content = UNMutableNotificationContent()
+                content.title = "Ônibus a caminho"
+                content.body = "Seu ônibus está chegando — \(itinerario.nome)"
+                content.sound = .default
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15, repeats: false)
+                center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
+            }
+        } else {
+            center.removePendingNotificationRequests(withIdentifiers: [id])
         }
     }
 
