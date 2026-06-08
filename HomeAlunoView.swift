@@ -234,9 +234,8 @@ private struct MenuLateralView: View {
     @Environment(\.openURL) private var openURL
     @State private var mostrarEmBreve = false
 
-    // TODO: preencher com as URLs oficiais do Ibmec
-    private let savaURLString = "" // TODO
-    private let siaURLString = ""  // TODO
+    private let savaURLString = "https://estudante.ibmec.br/login"
+    private let siaURLString = "https://sia.ibmec.br/sianet/logon"
 
     var body: some View {
         ScrollView(showsIndicators: false) {
