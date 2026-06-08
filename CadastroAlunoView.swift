@@ -96,7 +96,8 @@ struct CadastroAlunoView: View {
                     nome: nome,
                     email: email,
                     documento: documento,
-                    tipoDocumento: tipoDocumento
+                    // Backend espera "CPF" | "PASSAPORTE" (maiúsculo).
+                    tipoDocumento: tipoDocumento == "Passaporte" ? "PASSAPORTE" : "CPF"
                 )
                 // Sucesso: volta para o login.
                 dismiss()

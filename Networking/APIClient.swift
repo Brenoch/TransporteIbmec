@@ -62,7 +62,10 @@ actor APIClient {
     // MARK: - Private
 
     private func buildRequest(path: String, method: Method, body: Encodable?, authenticated: Bool) throws -> URLRequest {
-        let url = AppConfig.baseURL.appendingPathComponent(path)
+        // Concatenação direta (preserva "/" e segmentos já percent-encoded, ex.: ids com espaço).
+        guard let url = URL(string: AppConfig.baseURL.absoluteString + "/" + path) else {
+            throw AppError.network(URLError(.badURL))
+        }
         var req = URLRequest(url: url)
         req.httpMethod = method.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -119,6 +122,11 @@ actor APIClient {
     }
 
     private func mapError(data: Data, status: Int) -> AppError {
+        // Erros de negócio do backend (HTTPException): {"detail": {error, detail, field?}}.
+        if let wrapper = try? decoder.decode(DetailWrapper.self, from: data) {
+            return .api(wrapper.detail, status: status)
+        }
+        // Erros no topo (ex.: validação 422): {error, detail, ...}.
         if let apiError = try? decoder.decode(APIError.self, from: data) {
             return .api(apiError, status: status)
         }
@@ -126,6 +134,9 @@ actor APIClient {
         let fallback = APIError(error: "http_\(status)", detail: "Erro inesperado (HTTP \(status)).", field: nil)
         return .api(fallback, status: status)
     }
+
+    /// Envelope aninhado usado pelos erros de negócio do backend.
+    private struct DetailWrapper: Decodable { let detail: APIError }
 }
 
 /// Apaga o tipo concreto de um `Encodable` para poder codificá-lo (Swift 5.5 não abre existenciais).

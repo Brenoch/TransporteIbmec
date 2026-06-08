@@ -48,9 +48,6 @@ private struct AppPrincipalView: View {
 
     var body: some View {
         TabView {
-            MapaRotaView(nomeAluno: nomeAluno)
-                .tabItem { Label("Mapa", systemImage: "map") }
-
             HomeAlunoView(nomeAluno: nomeAluno)
                 .tabItem { Label("Home", systemImage: "house") }
 

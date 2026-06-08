@@ -14,7 +14,7 @@
 		7616C7892FC5DF08004C5502 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7616C75C2FC5DF05004C5502 /* Persistence.swift */; };
 		7616C78B2FC5DF08004C5502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7616C75D2FC5DF08004C5502 /* Assets.xcassets */; };
 		76D045E92FC5E23E0099F7DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045E82FC5E23E0099F7DA /* ContentView.swift */; };
-		76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */; };		76D045FC2FC5E2650099F7DA /* MapaRotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */; };
+		76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */; };
 		76D046022FC5E2650099F7DA /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F12FC5E2650099F7DA /* Color+Hex.swift */; };
 		76D046062FC5E2650099F7DA /* HomeAlunoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */; };
 		76D046082FC5E2650099F7DA /* CadastroAlunoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D045F42FC5E2650099F7DA /* CadastroAlunoView.swift */; };
@@ -26,6 +26,8 @@
 		76BB000000000000000000B4 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB000000000000000000A4 /* TokenStore.swift */; };
 		76BB000000000000000000B5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB000000000000000000A5 /* APIClient.swift */; };
 		76BB000000000000000000B6 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB000000000000000000A6 /* AuthManager.swift */; };
+		76BB000000000000000000B7 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB000000000000000000A7 /* BackendService.swift */; };
+		76AA000000000000000000F4 /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AA000000000000000000F3 /* RouteDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +51,7 @@
 		7616C7752FC5DF08004C5502 /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
 		76D045E82FC5E23E0099F7DA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = SOURCE_ROOT; };
 		76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteirinhaDigitalView.swift; sourceTree = SOURCE_ROOT; };
-		76D045EC2FC5E2650099F7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = SOURCE_ROOT; };		76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapaRotaView.swift; sourceTree = SOURCE_ROOT; };
+		76D045EC2FC5E2650099F7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		76D045EF2FC5E2650099F7DA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		76D045F12FC5E2650099F7DA /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = SOURCE_ROOT; };		76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAlunoView.swift; sourceTree = SOURCE_ROOT; };
 		76D045F42FC5E2650099F7DA /* CadastroAlunoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CadastroAlunoView.swift; sourceTree = SOURCE_ROOT; };
@@ -61,7 +63,9 @@
 		76BB000000000000000000A4 /* TokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
 		76BB000000000000000000A5 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		76BB000000000000000000A6 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		76BB000000000000000000C0 /* Networking */ = {isa = PBXGroup; children = (76BB000000000000000000A1 /* AppConfig.swift */, 76BB000000000000000000A2 /* APIError.swift */, 76BB000000000000000000A3 /* Models.swift */, 76BB000000000000000000A4 /* TokenStore.swift */, 76BB000000000000000000A5 /* APIClient.swift */, 76BB000000000000000000A6 /* AuthManager.swift */, ); path = Networking; sourceTree = SOURCE_ROOT; };
+		76BB000000000000000000A7 /* BackendService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
+		76AA000000000000000000F3 /* RouteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = SOURCE_ROOT; };
+		76BB000000000000000000C0 /* Networking */ = {isa = PBXGroup; children = (76BB000000000000000000A1 /* AppConfig.swift */, 76BB000000000000000000A2 /* APIError.swift */, 76BB000000000000000000A3 /* Models.swift */, 76BB000000000000000000A4 /* TokenStore.swift */, 76BB000000000000000000A5 /* APIClient.swift */, 76BB000000000000000000A6 /* AuthManager.swift */, 76BB000000000000000000A7 /* BackendService.swift */, ); path = Networking; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +103,12 @@
 				7616C75C2FC5DF05004C5502 /* Persistence.swift */,
 				76D045E82FC5E23E0099F7DA /* ContentView.swift */,				76D045F42FC5E2650099F7DA /* CadastroAlunoView.swift */,
 				76AA000000000000000000F1 /* AuthComponents.swift */,
+				76AA000000000000000000F3 /* RouteDetailView.swift */,
 				76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */,
 				76D045F12FC5E2650099F7DA /* Color+Hex.swift */,
 				76D045F52FC5E2650099F7DA /* EsqueciSenhaView.swift */,
 				76D045F32FC5E2650099F7DA /* HomeAlunoView.swift */,
-				76D045EC2FC5E2650099F7DA /* Info.plist */,
-				76D045EE2FC5E2650099F7DA /* MapaRotaView.swift */,
-				76D045EF2FC5E2650099F7DA /* README.md */,
+				76D045EC2FC5E2650099F7DA /* Info.plist */,				76D045EF2FC5E2650099F7DA /* README.md */,
 				7616C75D2FC5DF08004C5502 /* Assets.xcassets */,
 				7616C7582FC5DF05004C5502 /* TransporteIBMEC.xcdatamodeld */,
 			);
@@ -232,9 +235,7 @@
 				7616C7852FC5DF08004C5502 /* TransporteIBMECApp.swift in Sources */,
 				76D046082FC5E2650099F7DA /* CadastroAlunoView.swift in Sources */,
 				76D045E92FC5E23E0099F7DA /* ContentView.swift in Sources */,
-				76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */,
-				76D045FC2FC5E2650099F7DA /* MapaRotaView.swift in Sources */,
-				76D0460A2FC5E2660099F7DA /* EsqueciSenhaView.swift in Sources */,
+				76D045F62FC5E2650099F7DA /* CarteirinhaDigitalView.swift in Sources */,				76D0460A2FC5E2660099F7DA /* EsqueciSenhaView.swift in Sources */,
 				76AA000000000000000000F2 /* AuthComponents.swift in Sources */,
 				76D046062FC5E2650099F7DA /* HomeAlunoView.swift in Sources */,				7616C7892FC5DF08004C5502 /* Persistence.swift in Sources */,
 				7616C7832FC5DF08004C5502 /* TransporteIBMEC.xcdatamodeld in Sources */,
@@ -245,6 +246,8 @@
 				76BB000000000000000000B4 /* TokenStore.swift in Sources */,
 				76BB000000000000000000B5 /* APIClient.swift in Sources */,
 				76BB000000000000000000B6 /* AuthManager.swift in Sources */,
+				76BB000000000000000000B7 /* BackendService.swift in Sources */,
+				76AA000000000000000000F4 /* RouteDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
