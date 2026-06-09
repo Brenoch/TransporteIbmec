@@ -25,6 +25,7 @@
 		76BB000000000000000000B7 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB000000000000000000A7 /* BackendService.swift */; };
 		76AA000000000000000000F4 /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AA000000000000000000F3 /* RouteDetailView.swift */; };
 		76AA000000000000000000F6 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AA000000000000000000F5 /* ShareSheet.swift */; };
+		76AA000000000000000000F8 /* AdminViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AA000000000000000000F7 /* AdminViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		76BB000000000000000000A7 /* BackendService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
 		76AA000000000000000000F3 /* RouteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = SOURCE_ROOT; };
 		76AA000000000000000000F5 /* ShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = SOURCE_ROOT; };
+		76AA000000000000000000F7 /* AdminViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViews.swift; sourceTree = SOURCE_ROOT; };
 		76BB000000000000000000C0 /* Networking */ = {isa = PBXGroup; children = (76BB000000000000000000A1 /* AppConfig.swift */, 76BB000000000000000000A2 /* APIError.swift */, 76BB000000000000000000A3 /* Models.swift */, 76BB000000000000000000A4 /* TokenStore.swift */, 76BB000000000000000000A5 /* APIClient.swift */, 76BB000000000000000000A6 /* AuthManager.swift */, 76BB000000000000000000A7 /* BackendService.swift */, ); path = Networking; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 				76AA000000000000000000F1 /* AuthComponents.swift */,
 				76AA000000000000000000F3 /* RouteDetailView.swift */,
 				76AA000000000000000000F5 /* ShareSheet.swift */,
+				76AA000000000000000000F7 /* AdminViews.swift */,
 				76D045EB2FC5E2650099F7DA /* CarteirinhaDigitalView.swift */,
 				76D045F12FC5E2650099F7DA /* Color+Hex.swift */,
 				76D045F52FC5E2650099F7DA /* EsqueciSenhaView.swift */,
@@ -239,6 +242,7 @@
 				76BB000000000000000000B7 /* BackendService.swift in Sources */,
 				76AA000000000000000000F4 /* RouteDetailView.swift in Sources */,
 				76AA000000000000000000F6 /* ShareSheet.swift in Sources */,
+				76AA000000000000000000F8 /* AdminViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

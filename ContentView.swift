@@ -17,6 +17,8 @@ struct ContentView: View {
                 AppPrincipalView(nomeAluno: nome)
             case .motorista(let nome):
                 MotoristaPlaceholderView(nome: nome)
+            case .admin:
+                AdminRotasView()
             case .outro(let tipo):
                 AcessoIndisponivelView(tipo: tipo)
             }

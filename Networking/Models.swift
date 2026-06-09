@@ -100,6 +100,50 @@ struct LiveLocation: Decodable {
     var temPosicao: Bool { lat != 0 || lng != 0 }
 }
 
+// MARK: - Admin: Itinerários (rotas)
+
+/// Ponto geográfico para envio (Encodable). camelCase bate com o backend.
+struct GeoPointInput: Encodable {
+    let latitude: Double
+    let longitude: Double
+}
+
+struct LocalizacaoInput: Encodable {
+    let local: GeoPointInput
+    let endereco: String?
+}
+
+/// Corpo para criar/editar um itinerário (admin).
+/// Serve tanto para `POST /itinerarios` quanto para `PUT /itinerarios/{id}`.
+struct ItinerarioInput: Encodable {
+    let nome: String
+    let rotas: [String]
+    let horarios: [String]
+    let endereco: String
+    let localizacaoAtual: LocalizacaoInput
+}
+
+/// Corpo de `PATCH /itinerarios/{id}/suspender`.
+struct SuspenderRequest: Encodable {
+    let suspensa: Bool
+}
+
+// MARK: - Admin: Motoristas
+
+struct Motorista: Decodable, Identifiable {
+    let cpf: String
+    let nome: String
+    let uid: String?
+    var id: String { cpf }
+}
+
+/// Corpo de `POST /motoristas` (admin). O backend NÃO tem campo de CNH.
+struct MotoristaCreateRequest: Encodable {
+    let cpf: String
+    let nome: String
+    let senha: String
+}
+
 // MARK: - Util
 
 /// Para endpoints que respondem sem corpo útil.

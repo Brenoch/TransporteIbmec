@@ -19,6 +19,9 @@ actor APIClient {
     enum Method: String {
         case get = "GET"
         case post = "POST"
+        case put = "PUT"
+        case patch = "PATCH"
+        case delete = "DELETE"
     }
 
     /// Executa uma request e decodifica a resposta em `T`.

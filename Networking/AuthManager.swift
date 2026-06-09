@@ -11,6 +11,7 @@ final class AuthManager: ObservableObject {
         case deslogado
         case aluno(nome: String)
         case motorista(nome: String)
+        case admin(nome: String)
         case outro(tipo: String)
     }
 
@@ -91,6 +92,8 @@ final class AuthManager: ObservableObject {
             return .aluno(nome: nome)
         case "motorista":
             return .motorista(nome: nome)
+        case "adm":
+            return .admin(nome: nome)
         default:
             return .outro(tipo: tipo)
         }
