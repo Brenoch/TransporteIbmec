@@ -1,0 +1,85 @@
+name: Capturas de tela
+
+on:
+  push:
+    branches: [ci/screenshots]
+  workflow_dispatch:
+
+jobs:
+  screenshots:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versões
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+          python3 --version
+
+      - name: Servidor falso da API
+        run: |
+          python3 ci/mock_server.py > mock.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:8000/api/v1/itinerarios >/dev/null && break
+            sleep 1
+          done
+          curl -s http://127.0.0.1:8000/api/v1/itinerarios | head -c 200; echo
+
+      - name: Preparar cópia de trabalho (não vai para o repositório)
+        run: |
+          sed -i '' 's|https://apponibusibmec-default-rtdb.firebaseio.com|http://localhost:8000/rtdb|' Networking/AppConfig.swift
+          grep -n "rtdbURL" Networking/AppConfig.swift
+          cp ci/ScreenshotTests.swift "Tests iOS/Tests_iOS.swift"
+          rm -f "Tests iOS/Tests_iOSLaunchTests.swift"
+          mkdir -p TransporteIBMEC.xcodeproj/xcshareddata/xcschemes
+          cp ci/Screenshots.xcscheme TransporteIBMEC.xcodeproj/xcshareddata/xcschemes/Screenshots.xcscheme
+          xcodebuild -list -project TransporteIBMEC.xcodeproj
+
+      - name: Escolher simulador
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)['devices']
+          best=None
+          for runtime,devs in d.items():
+              if 'iOS' not in runtime: continue
+              for x in devs:
+                  if x['name'].startswith('iPhone') and ('Pro' in x['name'] and 'Max' not in x['name']):
+                      best=x['udid']
+          print(best or '')
+          ")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          echo "Simulador: $UDID"
+          xcrun simctl list devices available | grep -i iphone | head -20
+
+      - name: Compilar e rodar o teste de capturas
+        run: |
+          mkdir -p /tmp/shots
+          set -o pipefail
+          xcodebuild test \
+            -project TransporteIBMEC.xcodeproj \
+            -scheme Screenshots \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath "$RUNNER_TEMP/result.xcresult" \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee xcodebuild.log | tail -80
+
+      - name: Reunir capturas
+        if: always()
+        run: |
+          mkdir -p shots
+          cp /tmp/shots/*.png shots/ 2>/dev/null || true
+          ls -la shots
+          cp mock.log shots/ 2>/dev/null || true
+          cp xcodebuild.log shots/ 2>/dev/null || true
+
+      - name: Enviar capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capturas
+          path: shots/
+          if-no-files-found: warn
