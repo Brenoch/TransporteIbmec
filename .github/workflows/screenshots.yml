@@ -32,7 +32,7 @@ jobs:
           sed -i '' 's|https://apponibusibmec-default-rtdb.firebaseio.com|http://localhost:8000/rtdb|' Networking/AppConfig.swift
           grep -n "rtdbURL" Networking/AppConfig.swift
           cp ci/ScreenshotTests.swift "Tests iOS/Tests_iOS.swift"
-          rm -f "Tests iOS/Tests_iOSLaunchTests.swift"
+          echo "import XCTest" > "Tests iOS/Tests_iOSLaunchTests.swift"
           mkdir -p TransporteIBMEC.xcodeproj/xcshareddata/xcschemes
           cp ci/Screenshots.xcscheme TransporteIBMEC.xcodeproj/xcshareddata/xcschemes/Screenshots.xcscheme
           xcodebuild -list -project TransporteIBMEC.xcodeproj
